@@ -1,0 +1,172 @@
+.menu-bar{
+    height:60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 25px;
+    background:white;
+    box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
+
+.menu-btn,
+.logout-btn{
+    border:none;
+    background:white;
+    padding:10px 18px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+    transition:.3s;
+}
+
+.menu-btn:hover,
+.logout-btn:hover{
+    background:#eef5ff;
+    color:#0d6efd;
+}
+
+.menu-lateral{
+    position:absolute;
+    top:65px;
+    left:15px;
+    width:190px;
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+    animation:menu .25s ease;
+    z-index:1000;
+}
+
+.menu-lateral a{
+    display:block;
+    padding:15px;
+    text-decoration:none;
+    color:#0d6efd;
+    font-weight:600;
+    transition:.25s;
+}
+
+.menu-lateral a:hover{
+    background:#eef5ff;
+    padding-left:22px;
+}
+
+.home-container{
+    height:calc(100vh - 60px);
+    position:relative;
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at top left,#eaf3ff 0%,transparent 35%),
+    radial-gradient(circle at bottom right,#f5f9ff 0%,transparent 35%),
+    #ffffff;
+}
+
+.ranger-img{
+    width:900px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+   
+    animation:carro 1s ease;
+    transition:.35s;
+}
+
+.ranger-img:hover{
+    transform:translate(-50%,-50%) scale(1.03);
+}
+
+.welcome-card{
+    width:360px;
+    min-height:220px;
+
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.82);
+
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.75);
+
+    box-shadow:
+    0 15px 40px rgba(0,0,0,.10);
+
+    animation:card 1s ease;
+}
+
+.welcome-card h5{
+    color:#003478;
+    font-size:28px;
+    margin-bottom:20px;
+    font-weight:700;
+}
+
+.welcome-card p{
+    color:#0d6efd;
+    font-size:20px;
+    font-weight:600;
+}
+
+@keyframes carro{
+
+    from{
+        opacity:0;
+        transform:translate(-50%,-45%);
+    }
+
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+
+}
+
+@keyframes card{
+
+    from{
+        opacity:0;
+        transform:translate(-50%,-40%);
+    }
+
+    to{
+        opacity:1;
+        transform:translate(-50%,-50%);
+    }
+
+}
+
+@keyframes menu{
+
+    from{
+        opacity:0;
+        transform:translateY(-10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .ranger-img{
+        width:95%;
+    }
+
+    .welcome-card{
+        width:90%;
+    }
+
+}

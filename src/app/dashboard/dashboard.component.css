@@ -1,0 +1,193 @@
+body{
+    background:linear-gradient(to bottom,#f4f6f9,#acb3bd);
+}
+
+h1{
+    text-align:center;
+    color:#003478;
+    margin:30px 0;
+    font-weight:bold;
+}
+
+.top-bar{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:60px;
+    display:flex;
+    align-items:center;
+    padding:0 20px;
+    z-index:1000;
+}
+
+.home-btn{
+    border:none;
+    background:white;
+    width:45px;
+    height:35px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    cursor:pointer;
+    color:#12294b;
+    font-size:24px;
+    font-weight:bold;
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+    transition:.25s;
+}
+
+.home-btn:hover{
+    background:#eef5ff;
+    transform:translateY(-2px);
+}
+
+.menu-lateral{
+    position:absolute;
+    top:60px;
+    left:20px;
+    width:180px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:12px;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    overflow:hidden;
+    z-index:1000;
+}
+
+.menu-lateral a{
+    display:block;
+    padding:12px 16px;
+    text-decoration:none;
+    color:#0d6efd;
+    font-weight:bold;
+    transition:.2s;
+    cursor:pointer;
+}
+
+.menu-lateral a:hover{
+    background:#f5f5f5;
+}
+
+.dashboard-top{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:25px;
+    margin:40px auto;
+    flex-wrap:wrap;
+}
+
+.vehicle-box,
+.card-box{
+    width:240px;
+    min-height:170px;
+    background:white;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.10);
+    transition:.3s;
+    border:1px solid #edf0f4;
+}
+
+.vehicle-box:hover,
+.card-box:hover{
+    transform:translateY(-5px);
+}
+
+.vehicle-box h3,
+.card-box h3{
+    color:#003478;
+    margin-bottom:25px;
+    font-size:20px;
+}
+
+.vehicle-box select{
+    width:100%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ced4da;
+}
+
+.card-box p{
+    font-size:42px;
+    color:#0d6efd;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.card-box span{
+    color:#6c757d;
+    font-size:18px;
+}
+
+.car-container{
+    text-align:center;
+    margin-top:50px;
+}
+
+.car-img{
+    width:650px;
+    max-width:95%;
+    transition:.3s;
+}
+
+.car-img:hover{
+    transform:scale(1.03);
+}
+
+.vin-search{
+    text-align:center;
+    margin:50px 0;
+}
+
+.vin-search input{
+    width:380px;
+    max-width:90%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ced4da;
+}
+
+.vin-search button{
+    margin-left:10px;
+    padding:12px 25px;
+    border:none;
+    border-radius:8px;
+    background:#1751a8;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.vin-search button:hover{
+    background:#0e3063;
+}
+
+.vehicle-table{
+    width:95%;
+    margin:40px auto;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+    background:white;
+}
+
+.vehicle-table th{
+    background:#003478;
+    color:white;
+    padding:18px;
+}
+
+.vehicle-table td{
+    padding:18px;
+    text-align:center;
+    border-bottom:1px solid #e9ecef;
+}
+
+.vehicle-table tr:hover{
+    background:#f8f9fa;
+}

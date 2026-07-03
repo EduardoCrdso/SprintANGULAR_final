@@ -1,0 +1,67 @@
+<div class="login-container">
+
+  <div class="left-side">
+
+    <img
+      src="/img/ranger.png"
+      alt="Ranger">
+
+  </div>
+
+  <div class="right-side">
+
+    <img
+      src="/img/ford.png"
+      alt="Ford"
+      class="logo">
+
+    <h2>Boas-vindas</h2>
+
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Insira seu usuário"
+      [(ngModel)]="nome">
+
+    <input
+      type="password"
+      class="form-control mt-3"
+      placeholder="Insira sua senha"
+      [(ngModel)]="senha">
+
+    <div class="form-check mt-3">
+
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="lembrar">
+
+      <label
+        class="form-check-label"
+        for="lembrar">
+
+        Manter conectado
+
+      </label>
+
+    </div>
+
+    <div
+      *ngIf="erroLogin"
+      class="alert alert-danger mt-3">
+
+      {{ erroLogin }}
+
+    </div>
+
+    <button
+      class="btn btn-success mt-4 w-100"
+      (click)="entrar()">
+
+      Entrar
+
+    </button>
+
+  </div>
+
+</div>

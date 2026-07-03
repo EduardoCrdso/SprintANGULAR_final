@@ -1,0 +1,55 @@
+<div
+  class="home-container"
+  (click)="esconderBoasVindas()">
+
+  <div class="menu-bar">
+
+    <button
+      class="menu-btn"
+      (click)="toggleMenu(); $event.stopPropagation()">
+      ☰
+    </button>
+
+    <button
+      class="logout-btn"
+      (click)="logout(); $event.stopPropagation()">
+      Logout
+    </button>
+
+  </div>
+
+  <div
+    class="menu-lateral"
+    *ngIf="menuAberto"
+    (click)="$event.stopPropagation()">
+
+    <a
+      routerLink="/home"
+      (click)="menuAberto = false">
+      Home
+    </a>
+
+    <a
+      routerLink="/dashboard"
+      (click)="menuAberto = false">
+      Dashboard
+    </a>
+
+  </div>
+
+  <img
+    src="/img/ranger.png"
+    alt="Ford Ranger"
+    class="ranger-img">
+
+  <div
+    class="welcome-card"
+    *ngIf="mostrarBoasVindas">
+
+    <h5>Sistema de dados FORD</h5>
+
+    <p>Seja bem vindo(a)!</p>
+
+  </div>
+
+</div>
