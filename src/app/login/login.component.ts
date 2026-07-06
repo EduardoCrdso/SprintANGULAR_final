@@ -15,8 +15,8 @@ export class LoginComponent {
 
   nome = '';
   senha = '';
-
   erroLogin = '';
+  aceitouTermos = false;
 
   constructor(
     private authService: AuthService,
@@ -24,31 +24,19 @@ export class LoginComponent {
   ) {}
 
   entrar() {
-
     this.erroLogin = '';
 
     this.authService.login(this.nome, this.senha).subscribe({
-
       next: (res) => {
-
         console.log('Login realizado com sucesso!', res);
-
         localStorage.setItem('logado', 'true');
-
         this.router.navigate(['/home']);
-
       },
-
       error: (err) => {
-
         console.log('Erro no login', err);
-
         this.erroLogin = 'Usuário ou senha inválidos.';
-
       }
-
     });
-
   }
 
 }
