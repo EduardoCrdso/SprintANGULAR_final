@@ -12,31 +12,21 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
 
   menuAberto = false;
-
   mostrarBoasVindas = true;
 
   constructor(private router: Router) {}
 
   toggleMenu() {
-
     this.menuAberto = !this.menuAberto;
-
     this.mostrarBoasVindas = false;
-
   }
 
   esconderBoasVindas() {
-
     this.mostrarBoasVindas = false;
-
   }
 
   logout() {
-
     localStorage.removeItem('logado');
-
     this.router.navigate(['/']);
-
   }
-
 }

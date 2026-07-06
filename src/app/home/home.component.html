@@ -1,55 +1,37 @@
-<div
-  class="home-container"
-  (click)="esconderBoasVindas()">
+<div class="home-container" (click)="esconderBoasVindas()">
 
   <div class="menu-bar">
-
-    <button
-      class="menu-btn"
-      (click)="toggleMenu(); $event.stopPropagation()">
-      ☰
-    </button>
-
-    <button
-      class="logout-btn"
-      (click)="logout(); $event.stopPropagation()">
-      Logout
-    </button>
-
+    <button class="menu-btn" (click)="toggleMenu(); $event.stopPropagation()">☰</button>
+    <button class="logout-btn" (click)="logout(); $event.stopPropagation()">Logout</button>
   </div>
 
-  <div
-    class="menu-lateral"
-    *ngIf="menuAberto"
-    (click)="$event.stopPropagation()">
-
-    <a
-      routerLink="/home"
-      (click)="menuAberto = false">
-      Home
-    </a>
-
-    <a
-      routerLink="/dashboard"
-      (click)="menuAberto = false">
-      Dashboard
-    </a>
-
+  <div class="menu-lateral" *ngIf="menuAberto" (click)="$event.stopPropagation()">
+    <a routerLink="/home" (click)="menuAberto = false">Home</a>
+    <a routerLink="/dashboard" (click)="menuAberto = false">Dashboard</a>
   </div>
 
-  <img
-    src="/img/ranger.png"
-    alt="Ford Ranger"
-    class="ranger-img">
+  <div class="container mt-5">
+    <div id="studyCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="d-block w-100 p-5 text-center bg-secondary text-white rounded">
+            <h3>Bem-vindo ao StudyFlow</h3>
+            <p>Sua plataforma de organização e produtividade.</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="d-block w-100 p-5 text-center bg-success text-white rounded">
+            <h3>Dica do dia</h3>
+            <p>Use a técnica Pomodoro para manter o foco.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <div
-    class="welcome-card"
-    *ngIf="mostrarBoasVindas">
-
-    <h5>Sistema de dados FORD</h5>
-
-    <p>Seja bem vindo(a)!</p>
-
+  <div class="welcome-card" *ngIf="mostrarBoasVindas">
+    <h5>StudyFlow</h5>
+    <p>Pronto para começar seus estudos?</p>
   </div>
 
 </div>

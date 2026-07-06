@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   login(nome: string, senha: string) {
-    return this.http.post(
-      'http://localhost:3001/login',
-      {
-        nome: nome,
-        senha: senha
-      }
-    );
+    if (nome === 'admin' && senha === '123456') {
+      return of({ sucesso: true, usuario: nome });
+    } else {
+      return throwError(() => new Error('Usuário ou senha inválidos.'));
+    }
   }
 
 }
