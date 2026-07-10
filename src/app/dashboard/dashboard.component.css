@@ -1,193 +1,144 @@
-body{
-    background:linear-gradient(to bottom,#f4f6f9,#acb3bd);
+.home-bg-wrapper {
+  min-height: 100vh;
+  background-color: #000000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow-x: hidden;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  transition: background-image 1.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
-h1{
-    text-align:center;
-    color:#003478;
-    margin:30px 0;
-    font-weight:bold;
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(12, 19, 14, 0.88);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.top-bar{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:60px;
-    display:flex;
-    align-items:center;
-    padding:0 20px;
-    z-index:1000;
+.style-navbar {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #18181b !important;
+  z-index: 100;
+  position: relative;
 }
 
-.home-btn{
-    border:none;
-    background:white;
-    width:45px;
-    height:35px;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    cursor:pointer;
-    color:#12294b;
-    font-size:24px;
-    font-weight:bold;
-    box-shadow:0 3px 12px rgba(0,0,0,.12);
-    transition:.25s;
+.style-logo {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #a0dfa8;
 }
 
-.home-btn:hover{
-    background:#eef5ff;
-    transform:translateY(-2px);
+.btn-menu-toggle {
+  background-color: #09090b;
+  color: #a1a1aa;
+  border: 1px solid #27272a !important;
+  transition: all 0.2s;
 }
 
-.menu-lateral{
-    position:absolute;
-    top:60px;
-    left:20px;
-    width:180px;
-    background:white;
-    border:1px solid #ddd;
-    border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
-    overflow:hidden;
-    z-index:1000;
+.btn-menu-toggle:hover {
+  background-color: #18181b;
+  color: #ffffff;
 }
 
-.menu-lateral a{
-    display:block;
-    padding:12px 16px;
-    text-decoration:none;
-    color:#0d6efd;
-    font-weight:bold;
-    transition:.2s;
-    cursor:pointer;
+.style-content {
+  z-index: 10;
+  flex: 1;
 }
 
-.menu-lateral a:hover{
-    background:#f5f5f5;
+.solid-card {
+  background-color: rgba(34, 39, 34, 0.37) !important;
+  backdrop-filter: blur(11px) !important;
+  -webkit-backdrop-filter: blur(11px) !important;
+  border: 1px solid #788a7c !important;
+  box-shadow: inset 0 0 10px hsl(0% 0% 0% / 0.5);
+  border-radius: 8px !important;
 }
 
-.dashboard-top{
-    display:flex;
-    justify-content:center;
-    align-items:stretch;
-    gap:25px;
-    margin:40px auto;
-    flex-wrap:wrap;
+.menu-flutuante {
+  width: 260px; 
+  background-color: #000000; 
+  z-index: 1050; 
+  border-right: 1px solid #18181b !important;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s;
 }
 
-.vehicle-box,
-.card-box{
-    width:240px;
-    min-height:170px;
-    background:white;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 4px 15px rgba(0,0,0,.10);
-    transition:.3s;
-    border:1px solid #edf0f4;
+.menu-flutuante.aberto {
+  transform: translateX(0);
+  visibility: visible;
 }
 
-.vehicle-box:hover,
-.card-box:hover{
-    transform:translateY(-5px);
+.menu-flutuante .nav-link {
+  transition: all 0.2s ease-in-out !important;
 }
 
-.vehicle-box h3,
-.card-box h3{
-    color:#003478;
-    margin-bottom:25px;
-    font-size:20px;
+.menu-flutuante .nav-link.hover-white:hover,
+.style-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
 }
 
-.vehicle-box select{
-    width:100%;
-    padding:12px;
-    border-radius:8px;
-    border:1px solid #ced4da;
+.input-custom {
+  background-color: #000000 !important;
+  border: 1px solid #27272a !important;
+  color: #e4e4e7 !important;
+  border-radius: 6px;
 }
 
-.card-box p{
-    font-size:42px;
-    color:#0d6efd;
-    font-weight:bold;
-    margin-bottom:5px;
+.input-custom:focus {
+  background-color: #09090b !important;
+  border-color: #52525b !important;
+  box-shadow: none !important;
 }
 
-.card-box span{
-    color:#6c757d;
-    font-size:18px;
+.btn-adicionar-aula {
+  background-color: #ffffff;
+  color: #000000 !important;
+  transition: transform 0.1s ease;
+  border-radius: 6px;
 }
 
-.car-container{
-    text-align:center;
-    margin-top:50px;
+.btn-adicionar-aula:hover {
+  background-color: #e4e4e7;
 }
 
-.car-img{
-    width:650px;
-    max-width:95%;
-    transition:.3s;
+.style-table {
+  --bs-table-bg: transparent !important;
+  color: #f4f4f5 !important;
 }
 
-.car-img:hover{
-    transform:scale(1.03);
+.style-table tr {
+  transition: background-color 0.2s ease;
 }
 
-.vin-search{
-    text-align:center;
-    margin:50px 0;
+.style-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.02) !important;
 }
 
-.vin-search input{
-    width:380px;
-    max-width:90%;
-    padding:12px;
-    border-radius:8px;
-    border:1px solid #ced4da;
+.style-action-btn {
+  transition: color 0.2s ease-in-out;
 }
 
-.vin-search button{
-    margin-left:10px;
-    padding:12px 25px;
-    border:none;
-    border-radius:8px;
-    background:#1751a8;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
-}
-
-.vin-search button:hover{
-    background:#0e3063;
-}
-
-.vehicle-table{
-    width:95%;
-    margin:40px auto;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 4px 15px rgba(0,0,0,.1);
-    background:white;
-}
-
-.vehicle-table th{
-    background:#003478;
-    color:white;
-    padding:18px;
-}
-
-.vehicle-table td{
-    padding:18px;
-    text-align:center;
-    border-bottom:1px solid #e9ecef;
-}
-
-.vehicle-table tr:hover{
-    background:#f8f9fa;
+.style-footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 1.5rem 0;
+  border-top: 1px solid #18181b;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #598b59;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: auto;
 }

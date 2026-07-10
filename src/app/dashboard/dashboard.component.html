@@ -1,190 +1,178 @@
-<div class="container">
+<div class="home-bg-wrapper" [style.background-image]="'url(' + bgImagens[indexBg] + ')'">
 
-  <div class="top-bar mt-3">
+  <div class="dark-overlay"></div>
 
-    <button
-      class="home-btn"
-      (click)="toggleMenu()">
-
-      ☰
-
+  <header class="d-flex justify-content-between align-items-center p-3 border-bottom container-fluid style-navbar">
+    <button class="btn btn-dark border-0 px-3 py-2 btn-menu-toggle" (click)="toggleMenu(); $event.stopPropagation()">
+     ☰
     </button>
+    <div class="style-logo">STUDYFLOW: Análise de Desempenho</div>
+    <button class="btn btn-outline-light btn-sm px-3 py-2" (click)="logout(); $event.stopPropagation()">
+      Sair
+    </button>
+  </header>
 
+  <div class="position-absolute top-0 start-0 h-100 p-4 border-end menu-flutuante" [class.aberto]="menuAberto" (click)="$event.stopPropagation()">
+    <button class="btn btn-sm btn-dark float-end mb-4 border-0" style="background-color: #18181b;" (click)="menuAberto = false">X</button>
+    <div class="clearfix"></div>
+    <nav class="nav flex-column gap-2 mt-2">
+      <a routerLink="/home" class="nav-link text-white p-2 rounded fw-semibold style-nav-item" (click)="menuAberto = false">Home</a>
+      <a routerLink="/dashboard" class="nav-link text-white p-2 rounded bg-secondary fw-semibold" (click)="menuAberto = false">Dashboard Estudos</a>
+    </nav>
   </div>
 
-  <div
-    class="menu-lateral"
-    *ngIf="menuAberto">
-
-    <a
-      routerLink="/home"
-      (click)="menuAberto = false">
-
-      Home
-
-    </a>
-
-    <a
-      (click)="logout()">
-
-      Logout
-
-    </a>
-
-  </div>
-
-  <h1>Dashboard FORD</h1>
-
-  <div
-    *ngIf="selectedVehicle"
-    class="row justify-content-center align-items-stretch g-4">
-
-    <div class="col-md-3">
-
-      <div class="vehicle-box h-100">
-
-        <h3>Veículo</h3>
-
-        <select
-          class="form-select"
-          (change)="selectVehicleById($event)">
-
-          <option
-            *ngFor="let vehicle of vehicles"
-            [value]="vehicle.id">
-
-            {{ vehicle.vehicle }}
-
-          </option>
-
-        </select>
-
-      </div>
-
+  <div class="container mt-5 position-relative style-content">
+    
+    <div class="mb-4">
+      <p class="text-muted m-0 mt-1">Monitore seu rendimento e defina prioridades com base em métricas reais.</p>
     </div>
 
-    <div class="col-md-3">
-
-      <div class="card-box h-100">
-
-        <h3>Total de Vendas</h3>
-
-        <p>{{ selectedVehicle.volumetotal }}</p>
-
-        <span>Unid.</span>
-
-      </div>
-
-    </div>
-
-    <div class="col-md-3">
-
-      <div class="card-box h-100">
-
-        <h3>Conectados</h3>
-
-        <p>{{ selectedVehicle.connected }}</p>
-
-        <span>Unid.</span>
-
-      </div>
-
-    </div>
-
-    <div class="col-md-3">
-
-      <div class="card-box h-100">
-
-        <h3>Update Software</h3>
-
-        <p>{{ selectedVehicle.softwareUpdates }}</p>
-
-        <span>Unid.</span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div
-    *ngIf="selectedVehicle"
-    class="car-container">
-
-    <img
-      [src]="selectedVehicle.img"
-      class="car-img">
-
-  </div>
-
-  <div class="vin-search">
-
-    <div class="row justify-content-center">
-
-      <div class="col-md-6">
-
-        <div class="input-group">
-
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Digite o VIN"
-            [(ngModel)]="vin">
-
-          <button
-            class="btn btn-primary"
-            (click)="buscarVin()">
-
-            Buscar
-
-          </button>
-
+    <div class="card border-0 p-4 rounded-4 mb-4 solid-card shadow-sm">
+      <h3 class="h6 fw-bold mb-3 text-white tracking-wide text-uppercase">{{ idEmEdicao !== null ? 'EDITAR REGISTRO DE PROGRESSO' : 'REGISTRAR ATIVIDADE DE HOJE' }}</h3>
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <input type="text" class="form-control border-0 px-3 py-2 input-custom" placeholder="Matéria (ex: Matemática)" [(ngModel)]="materiaInput">
         </div>
+        <div class="col-12 col-md-4">
+          <input type="text" class="form-control border-0 px-3 py-2 input-custom" placeholder="Assunto Parado (ex: Funções)" [(ngModel)]="assuntoInput">
+        </div>
+        <div class="col-12 col-md-4">
+          <input type="number" class="form-control border-0 px-3 py-2 input-custom" placeholder="Horas Dedicadas" [(ngModel)]="horasInput">
+        </div>
+        <div class="col-12 col-md-4">
+          <input type="number" class="form-control border-0 px-3 py-2 input-custom" placeholder="Total de Questões Feitas" [(ngModel)]="questoesInput">
+        </div>
+        <div class="col-12 col-md-4">
+          <input type="number" class="form-control border-0 px-3 py-2 input-custom" placeholder="Quantidade de Acertos" [(ngModel)]="acertosInput">
+        </div>
+        <div class="col-12 col-md-4 d-flex gap-2">
+          <button class="btn w-100 fw-bold py-2 border-0 btn-adicionar-aula" (click)="salvarEstudo()">
+            {{ idEmEdicao !== null ? 'Salvar Alterações' : 'Adicionar Métricas' }}
+          </button>
+          <button *ngIf="idEmEdicao !== null" class="btn btn-dark rounded-3 border-secondary" (click)="limparFormulario()">X</button>
+        </div>
+      </div>
+    </div>
 
+    <div class="card border-0 rounded-4 shadow-lg overflow-hidden mb-5 solid-card">
+      <div class="p-4 border-bottom border-secondary" style="border-color: #27272a !important;">
+        <h3 class="h6 fw-bold text-white m-0 tracking-wide text-uppercase">HISTÓRICO DE RENDIMENTO</h3>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover mb-0 align-middle style-table">
+          <thead>
+            <tr style="color: #a1a1aa; font-size: 0.85rem; border-bottom: 1px solid #27272a;">
+              <th class="ps-4 py-3">MATÉRIA</th>
+              <th class="py-3">ASSUNTO</th>
+              <th class="py-3 text-center">TEMPO</th>
+              <th class="py-3 text-center">QUESTÕES (A / E)</th>
+              <th class="py-3 text-center">APROVEITAMENTO</th>
+              <th class="py-3 text-center">PRIORIDADE</th>
+              <th class="pe-4 py-3 text-center">AÇÕES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listaEstudos" style="border-bottom: 1px solid #18181b; font-size: 0.95rem;">
+              <td class="ps-4 fw-bold text-white py-3">{{ item.materia }}</td>
+              <td class="text-muted py-3">{{ item.assunto }}</td>
+              <td class="text-center py-3">
+                <span class="badge px-2 py-1 rounded" style="background-color: rgba(0, 0, 0, 0.3); color: #f4f4f5; border: 1px solid rgba(255, 255, 255, 0.05);">{{ item.horas }}h</span>
+              </td>
+              <td class="text-center text-muted py-3">
+                <span class="text-success fw-semibold">{{ item.acertos }}</span> / <span class="text-danger">{{ item.erros }}</span>
+              </td>
+              <td class="text-center py-3">
+                <div class="fw-bold" [style.color]="item.aproveitamento < 50 ? '#ef4444' : item.aproveitamento >= 75 ? '#10b981' : '#f59e0b'">
+                  {{ item.aproveitamento }}%
+                </div>
+              </td>
+              <td class="text-center py-3">
+                <span class="badge rounded-pill px-3 py-1 text-xs fw-bold" 
+                  [style.background-color]="item.prioridade === 'Alta' ? 'rgba(239, 68, 68, 0.15)' : item.prioridade === 'Média' ? 'rgba(245, 158, 11, 0.15)' : 'rgba(16, 185, 129, 0.15)'"
+                  [style.color]="item.prioridade === 'Alta' ? '#f87171' : item.prioridade === 'Média' ? '#fbbf24' : '#34d399'">
+                  {{ item.prioridade }}
+                </span>
+              </td>
+              <td class="pe-4 text-center py-3">
+                <button class="btn btn-sm btn-outline-warning me-2 border-0 fw-semibold style-action-btn" (click)="carregarEdicao(item)">Editar</button>
+                <button class="btn btn-sm btn-outline-danger border-0 fw-semibold style-action-btn" (click)="excluirEstudo(item.id)">Remover</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row g-4 mb-5" *ngIf="listaEstudos.length > 0">
+      
+      <div class="col-12 col-md-5">
+        <div class="card border-0 p-4 rounded-4 h-100 text-center d-flex flex-column align-items-center justify-content-center solid-card">
+          <h3 class="h6 fw-bold text-white tracking-wide mb-4 text-uppercase">Desempenho Geral</h3>
+          
+          <div class="position-relative d-inline-block">
+            <svg viewBox="0 0 36 36" style="width: 160px; height: 160px;">
+              <path style="fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 3.5;"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path [attr.stroke-dasharray]="strokeDashArray" 
+                style="fill: none; stroke: #10b981; stroke-width: 3.5; stroke-linecap: round; transition: stroke-dasharray 0.5s ease;"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            
+            <div class="position-absolute top-50 start-50 translate-middle text-center">
+              <span class="fs-3 fw-bold text-white d-block">{{ aproveitamentoGeral }}%</span>
+              <span class="text-muted small text-uppercase" style="font-size: 0.65rem; letter-spacing: 1px;">Acertos</span>
+            </div>
+          </div>
+
+          <div class="d-flex gap-4 mt-4 text-start">
+            <div>
+              <span class="d-inline-block rounded-circle me-1" style="width: 10px; height: 10px; background-color: #10b981;"></span>
+              <span class="text-muted small">Acertos: <strong>{{ totalAcertos }}</strong></span>
+            </div>
+            <div>
+              <span class="d-inline-block rounded-circle me-1" style="width: 10px; height: 10px; background-color: #ef4444;"></span>
+              <span class="text-muted small">Erros: <strong>{{ totalErros }}</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-7">
+        <div class="card border-0 p-4 rounded-4 h-100 solid-card">
+          <h3 class="h6 fw-bold text-white tracking-wide mb-4 text-uppercase">Volume de Carga Horária</h3>
+          
+          <div class="mb-4">
+            <div class="d-flex justify-content-between text-muted small mb-1">
+              <span>Tempo de Estudo Acumulado</span>
+              <span class="text-white fw-bold">{{ totalHoras }}h completadas</span>
+            </div>
+            <div class="progress rounded-pill" style="height: 10px; background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05);">
+              <div class="progress-bar rounded-pill" role="progressbar" 
+                   [style.width]="totalHoras > 0 ? '100%' : '0%'" 
+                   style="background-color: #10b981;"></div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between text-muted small mb-1">
+              <span>Total de Questões Respondidas</span>
+              <span class="text-white fw-semibold">{{ totalQuestoes }} resolvidas</span>
+            </div>
+          </div>
+          
+          <div class="p-3 rounded-3 mt-4" style="background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-left: 4px solid #f59e0b !important;">
+            <span class="fw-bold text-warning d-block small mb-1">💡 DICA DE ESTUDO:</span>
+            <span class="text-muted small">{{ dicas[indiceDica] }}</span>
+          </div>
+        </div>
       </div>
 
     </div>
 
   </div>
 
-  <div
-    *ngIf="vehicleData"
-    class="table-responsive">
-
-    <table class="table table-bordered table-hover text-center">
-
-      <thead class="table-primary">
-
-        <tr>
-
-          <th>Código VIN</th>
-          <th>Odômetro</th>
-          <th>Combustível</th>
-          <th>Status</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        <tr>
-
-          <td>{{ vin }}</td>
-          <td>{{ vehicleData.odometro }} Km</td>
-          <td>{{ vehicleData.nivelCombustivel }}%</td>
-          <td>{{ vehicleData.status }}</td>
-          <td>{{ vehicleData.lat }}</td>
-          <td>{{ vehicleData.long }}</td>
-
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
+  <footer class="style-footer">
+    <div>&copy; 2026 StudyFlow. Todos os direitos reservados.</div>
+  </footer>
 
 </div>

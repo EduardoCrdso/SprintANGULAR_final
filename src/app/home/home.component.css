@@ -1,172 +1,182 @@
-.menu-bar{
-    height:60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:0 25px;
-    background:white;
-    box-shadow:0 2px 15px rgba(0,0,0,.08);
+.home-bg-wrapper {
+  min-height: 100vh;
+  background-color: #000000;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow-x: hidden;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  transition: background-image 1.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
 }
 
-.menu-btn,
-.logout-btn{
-    border:none;
-    background:white;
-    padding:10px 18px;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:600;
-    transition:.3s;
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(12, 19, 14, 0.88);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.menu-btn:hover,
-.logout-btn:hover{
-    background:#eef5ff;
-    color:#0d6efd;
+.style-navbar {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid #18181b !important;
+  z-index: 100;
+  position: relative;
 }
 
-.menu-lateral{
-    position:absolute;
-    top:65px;
-    left:15px;
-    width:190px;
-    background:white;
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.12);
-    animation:menu .25s ease;
-    z-index:1000;
+.style-logo {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #a0dfa8;
 }
 
-.menu-lateral a{
-    display:block;
-    padding:15px;
-    text-decoration:none;
-    color:#0d6efd;
-    font-weight:600;
-    transition:.25s;
+.btn-menu-toggle {
+  background-color: #09090b;
+  color: #a1a1aa;
+  border: 1px solid #27272a !important;
+  transition: all 0.2s;
 }
 
-.menu-lateral a:hover{
-    background:#eef5ff;
-    padding-left:22px;
+.btn-menu-toggle:hover {
+  background-color: #18181b;
+  color: #ffffff;
 }
 
-.home-container{
-    height:calc(100vh - 60px);
-    position:relative;
-    overflow:hidden;
-
-    background:
-    radial-gradient(circle at top left,#eaf3ff 0%,transparent 35%),
-    radial-gradient(circle at bottom right,#f5f9ff 0%,transparent 35%),
-    #ffffff;
+.style-content {
+  z-index: 10;
+  flex: 1;
 }
 
-.ranger-img{
-    width:900px;
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-   
-    animation:carro 1s ease;
-    transition:.35s;
+.solid-card {
+  background-color: rgba(34, 39, 34, 0.37) !important;
+  backdrop-filter: blur(11px) !important;
+  -webkit-backdrop-filter: blur(11px) !important;
+  border: 1px solid #788a7c !important;
+  box-shadow: inset 0 0 10px hsl(0% 0% 0% / 0.5);
+  border-radius: 8px !important;
 }
 
-.ranger-img:hover{
-    transform:translate(-50%,-50%) scale(1.03);
+.carousel-transition-wrapper {
+  transition: opacity 0.22s ease-in-out, transform 0.22s ease-in-out;
+  opacity: 1;
+  transform: scale(1);
 }
 
-.welcome-card{
-    width:360px;
-    min-height:220px;
-
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-
-    padding:28px;
-
-    border-radius:22px;
-
-    background:rgba(255,255,255,.82);
-
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
-    border:1px solid rgba(255,255,255,.75);
-
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.10);
-
-    animation:card 1s ease;
+.carousel-transition-wrapper.slide-fade-out {
+  opacity: 0;
+  transform: scale(0.99);
 }
 
-.welcome-card h5{
-    color:#003478;
-    font-size:28px;
-    margin-bottom:20px;
-    font-weight:700;
+.menu-flutuante {
+  width: 260px; 
+  background-color: #000000; 
+  z-index: 1050; 
+  border-right: 1px solid #18181b !important;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s;
 }
 
-.welcome-card p{
-    color:#0d6efd;
-    font-size:20px;
-    font-weight:600;
+.menu-flutuante.aberto {
+  transform: translateX(0);
+  visibility: visible;
 }
 
-@keyframes carro{
-
-    from{
-        opacity:0;
-        transform:translate(-50%,-45%);
-    }
-
-    to{
-        opacity:1;
-        transform:translate(-50%,-50%);
-    }
-
+.menu-flutuante .nav-link {
+  transition: all 0.2s ease-in-out !important;
 }
 
-@keyframes card{
-
-    from{
-        opacity:0;
-        transform:translate(-50%,-40%);
-    }
-
-    to{
-        opacity:1;
-        transform:translate(-50%,-50%);
-    }
-
+.menu-flutuante .nav-link.hover-white:hover,
+.style-nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  color: #ffffff !important;
 }
 
-@keyframes menu{
-
-    from{
-        opacity:0;
-        transform:translateY(-10px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
+.input-custom {
+  background-color: #000000 !important;
+  border: 1px solid #27272a !important;
+  color: #e4e4e7 !important;
+  border-radius: 6px;
 }
 
-@media(max-width:768px){
+.input-custom:focus {
+  background-color: #09090b !important;
+  border-color: #52525b !important;
+  box-shadow: none !important;
+}
 
-    .ranger-img{
-        width:95%;
-    }
+.btn-adicionar-aula {
+  background-color: #ffffff;
+  color: #000000 !important;
+  transition: transform 0.1s ease;
+}
 
-    .welcome-card{
-        width:90%;
-    }
+.btn-adicionar-aula:hover {
+  background-color: #e4e4e7;
+}
 
+.list-item-aula {
+  background-color: #09090b; 
+  border: 1px solid #18181b;
+  border-radius: 6px !important;
+}
+
+.link-externo {
+  color: #71717a;
+  font-size: 0.85rem;
+  transition: color 0.2s;
+}
+
+.link-externo:hover {
+  color: #ffffff;
+}
+
+.control-btn {
+  font-size: 2rem !important;
+  transition: color 0.2s;
+}
+
+.control-btn:hover {
+  color: #ffffff !important;
+}
+
+.style-scroll-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.style-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.style-scroll-container::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+
+.style-footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 1.5rem 0;
+  border-top: 1px solid #18181b;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #598b59;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: auto;
+}
+
+.alert-toast {
+  background-color: #09090b; 
+  border: 1px solid #27272a !important; 
+  max-width: 280px; 
+  z-index: 1000;
 }

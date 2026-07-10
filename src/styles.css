@@ -1,1 +1,25 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+html, body {
+  background-color: #09090b !important;
+  color: #f4f4f5 !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+
+p, .text-muted, td, th {
+  color: #a1a1aa !important;
+}
+
+
+.form-control::placeholder {
+  color: #71717a !important;
+  opacity: 1;
+}
+
+.form-control {
+  color: #ffffff !important;
+  background-color: #27272a !important;
+}

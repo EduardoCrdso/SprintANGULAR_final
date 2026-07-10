@@ -1,70 +1,117 @@
-<div class="login-container d-flex align-items-center justify-content-center" style="height: 100vh; background: #121214;">
+<div class="login-bg-wrapper">
 
-  <div class="container row bg-dark p-5 rounded shadow-lg text-white" style="max-width: 900px;">
+  <div class="row w-100 mx-2 p-4 p-md-5 rounded-4 shadow-lg text-white glass-panel">
     
-    <!-- LADO ESQUERDO: StudyFlow -->
-    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center border-end border-secondary pe-md-5 mb-4 mb-md-0">
-      <div class="display-1 text-success mb-3">
-        <i class="bi bi-journal-bookmark-fill">🚀</i>
+    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center border-end pe-md-5 mb-4 mb-md-0"
+         style="border-color: rgba(255, 255, 255, 0.1) !important;">
+      <div class="display-3 mb-2 text-success" style="filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.4));">
+        ♛
       </div>
-      <h1 class="fw-bold text-success">StudyFlow</h1>
-      <p class="text-muted text-center">Organize suas matérias, metas e evolua nos seus estudos diários.</p>
+      <h1 class="fw-bold tracking-tight text-white m-0" style="font-size: 2.2rem;">StudyFlow</h1>
+      <p class="text-center mt-3 small" style="color: #e4e4e7; line-height: 1.6; max-width: 280px;">
+        Organize melhor seus estudos, registre seu progresso e destrave!
+      </p>
     </div>
 
-    <!-- LADO DIREITO: Formuário de Acesso -->
     <div class="col-md-6 ps-md-5 d-flex flex-column justify-content-center">
-      <h2 class="fw-semibold mb-4">Boas-vindas</h2>
+      <h2 class="fw-bold text-white mb-1" style="font-size: 1.5rem; letter-spacing: -0.5px;">
+        {{ isLoginMode ? 'Acessar sua Conta' : 'Criar Nova Conta' }}
+      </h2>
+      <p class="small mb-4" style="color: #a1a1aa;">
+        {{ isLoginMode ? 'Insira suas credenciais de estudante abaixo' : 'Escolha seu usuário e senha de acesso' }}
+      </p>
 
       <div class="mb-3">
-        <label class="form-label text-light">Usuário</label>
+        <label class="form-label small fw-semibold" style="color: #e4e4e7;">Usuário</label>
         <input
           type="text"
-          class="form-control bg-secondary text-white border-0"
-          placeholder="Insira seu usuário de estudante"
+          class="form-control px-3 py-2 rounded-3 text-white"
+          style="font-size: 0.95rem;"
+          placeholder="ex: admin"
           [(ngModel)]="nome">
       </div>
 
       <div class="mb-3">
-        <label class="form-label text-light">Senha</label>
+        <label class="form-label small fw-semibold" style="color: #e4e4e7;">Senha</label>
         <input
-          type="password"
-          class="form-control bg-secondary text-white border-0"
-          placeholder="Insira sua senha"
+          [type]="mostrarSenha ? 'text' : 'password'"
+          class="form-control px-3 py-2 rounded-3 text-white"
+          style="font-size: 0.95rem;"
+          placeholder="••••••••"
           [(ngModel)]="senha">
       </div>
 
-      <div class="form-check mb-3">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          id="lembrar">
-        <label class="form-check-label text-muted" for="lembrar">
-          Manter conectado
-        </label>
+      <div class="d-flex justify-content-between align-items-center gap-2 mb-4">
+        <div class="form-check">
+          <input
+            class="form-check-input bg-dark border-secondary"
+            type="checkbox"
+            id="revelarSenha"
+            style="border-color: rgba(255, 255, 255, 0.2) !important; cursor: pointer;"
+            [(ngModel)]="mostrarSenha">
+          <label class="form-check-label small text-muted" for="revelarSenha" style="cursor: pointer;">
+            Mostrar senha
+          </label>
+        </div>
+
+        <div class="form-check" *ngIf="isLoginMode">
+          <input
+            class="form-check-input bg-dark border-secondary"
+            type="checkbox"
+            id="lembrar"
+            style="border-color: rgba(255, 255, 255, 0.2) !important;">
+          <label class="form-check-label small" style="color: #a1a1aa;" for="lembrar">
+            Manter conectado
+          </label>
+        </div>
       </div>
 
-      <!-- TRAVA DA LGPD -->
       <div class="form-check mb-4">
         <input
-          class="form-check-input"
+          class="form-check-input border-secondary"
           type="checkbox"
           id="lgpd"
+          style="border-color: rgba(255, 255, 255, 0.2) !important; cursor: pointer;"
           [(ngModel)]="aceitouTermos">
-        <label class="form-check-label text-success fw-bold" for="lgpd">
-          Aceito os termos de privacidade (LGPD)
+        <label class="form-check-label small lh-sm" for="lgpd" style="color: #a1a1aa; cursor: pointer;">
+          Li os termos de uso e aceito o tratamento dos meus dados estudantis em conformidade estrita com a 
+          <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="text-success fw-semibold text-decoration-underline"
+             (click)="$event.stopPropagation()">
+            Lei Geral de Proteção de Dados (LGPD)
+          </a>.
         </label>
       </div>
 
-      <div *ngIf="erroLogin" class="alert alert-danger p-2 small">
-        {{ erroLogin }}
+      <div *ngIf="erroLogin" class="alert alert-danger border-0 p-2 small mb-3 rounded-3 text-center" 
+           style="background-color: rgba(239, 68, 68, 0.15); color: #f87171;">
+        ⚠️ {{ erroLogin }}
+      </div>
+
+      <div *ngIf="sucessoMensagem" class="alert alert-success border-0 p-2 small mb-3 rounded-3 text-center" 
+           style="background-color: rgba(16, 185, 129, 0.15); color: #34d399;">
+         {{ sucessoMensagem }}
       </div>
 
       <button
-        class="btn btn-success w-100 fw-bold py-2"
-        (click)="entrar()"
+        class="btn w-100 fw-bold py-2 rounded-3 text-dark border-0 transition-all shadow-sm"
+        [style.background-color]="aceitouTermos ? '#10b981' : 'rgba(255, 255, 255, 0.1)'"
+        [style.color]="aceitouTermos ? '#09090b' : '#71717a'"
+        [style.opacity]="aceitouTermos ? '1' : '0.6'"
+        [style.cursor]="aceitouTermos ? 'pointer' : 'not-allowed'"
+        (click)="isLoginMode ? entrar() : executarCadastro()"
         [disabled]="!aceitouTermos">
-        Entrar no Painel
+        {{ isLoginMode ? 'Entrar no Sistema' : 'Finalizar Cadastro' }}
       </button>
+
+      <div class="text-center mt-3">
+        <a (click)="alternarModo()" class="small text-muted text-decoration-none" style="cursor: pointer;">
+          {{ isLoginMode ? 'Não tem uma conta? Cadastre-se aqui' : 'Já possui cadastro? Entre por aqui' }}
+        </a>
+      </div>
+
     </div>
 
   </div>
