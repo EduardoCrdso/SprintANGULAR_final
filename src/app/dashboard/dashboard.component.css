@@ -1,4 +1,16 @@
 .home-bg-wrapper {
+  --bg-overlay: rgba(12, 19, 14, 0.88);
+  --text-primary: #ffffff;
+  --text-muted: #a1a1aa;
+  --card-bg: rgba(34, 39, 34, 0.37);
+  --card-border: #788a7c;
+  --nav-bg: rgba(0, 0, 0, 0.8);
+  --menu-bg: #000000;
+  --input-bg: #000000;
+  --input-border: #27272a;
+  --item-bg: rgba(0, 0, 0, 0.3);
+  --border-color: #18181b;
+
   min-height: 100vh;
   background-color: #000000;
   background-size: cover;
@@ -12,41 +24,92 @@
   flex-direction: column;
 }
 
+.home-bg-wrapper.light-theme {
+  --bg-overlay: rgba(240, 244, 248, 0.88);
+  --text-primary: #0f172a;
+  --text-muted: #475569;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: #cbd5e1;
+  --nav-bg: rgba(255, 255, 255, 0.9);
+  --menu-bg: #f8fafc;
+  --input-bg: #ffffff;
+  --input-border: #cbd5e1;
+  --item-bg: #f1f5f9;
+  --border-color: #cbd5e1;
+}
+
+.home-bg-wrapper.light-theme .text-white {
+  color: var(--text-primary) !important;
+}
+
+.home-bg-wrapper.light-theme .text-muted {
+  color: var(--text-muted) !important;
+}
+
 .dark-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(12, 19, 14, 0.88);
+  background-color: var(--bg-overlay);
   z-index: 1;
   pointer-events: none;
+  transition: background-color 0.3s ease;
 }
 
 .style-navbar {
-  background-color: rgba(0, 0, 0, 0.8);
-  border-bottom: 1px solid #18181b !important;
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--border-color) !important;
   z-index: 100;
   position: relative;
+  transition: background-color 0.3s ease;
 }
 
 .style-logo {
   font-size: 1.2rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  color: #a0dfa8;
+  color: hsla(140, 86%, 47%, 0.884);
+  border: 2px solid hsl(0%, 0%, 100%, 0.3);
+  background: hsl(0%, 0%, 100%, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 4px 12px;
+  border-radius: 6px;
 }
 
 .btn-menu-toggle {
-  background-color: #09090b;
-  color: #a1a1aa;
-  border: 1px solid #27272a !important;
+  background-color: var(--input-bg);
+  color: var(--text-muted);
+  border: 1px solid var(--input-border) !important;
   transition: all 0.2s;
 }
 
 .btn-menu-toggle:hover {
-  background-color: #18181b;
-  color: #ffffff;
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.btn-theme-toggle {
+  background-color: transparent;
+  color: var(--text-primary);
+  transition: transform 0.2s;
+}
+
+.btn-theme-toggle:hover {
+  transform: scale(1.15);
+}
+
+.btn-logout {
+  border: 1px solid var(--input-border);
+  color: var(--text-primary);
+  background-color: transparent;
+  transition: all 0.2s;
+}
+
+.btn-logout:hover {
+  background-color: var(--text-primary);
+  color: var(--menu-bg);
 }
 
 .style-content {
@@ -55,22 +118,23 @@
 }
 
 .solid-card {
-  background-color: rgba(34, 39, 34, 0.37) !important;
+  background-color: var(--card-bg) !important;
   backdrop-filter: blur(11px) !important;
   -webkit-backdrop-filter: blur(11px) !important;
-  border: 1px solid #788a7c !important;
-  box-shadow: inset 0 0 10px hsl(0% 0% 0% / 0.5);
+  border: 1px solid var(--card-border) !important;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
   border-radius: 8px !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .menu-flutuante {
   width: 260px; 
-  background-color: #000000; 
+  background-color: var(--menu-bg); 
   z-index: 1050; 
-  border-right: 1px solid #18181b !important;
+  border-right: 1px solid var(--border-color) !important;
   transform: translateX(-100%);
   visibility: hidden;
-  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.28s, background-color 0.3s ease;
 }
 
 .menu-flutuante.aberto {
@@ -78,43 +142,54 @@
   visibility: visible;
 }
 
-.menu-flutuante .nav-link {
+.btn-close-menu {
+  background-color: var(--input-bg);
+  color: var(--text-muted);
+}
+
+.style-nav-item-active {
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+}
+
+.style-nav-item {
+  color: var(--text-muted);
   transition: all 0.2s ease-in-out !important;
 }
 
-.menu-flutuante .nav-link.hover-white:hover,
 .style-nav-item:hover {
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  color: #ffffff !important;
+  background-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
 }
 
 .input-custom {
-  background-color: #000000 !important;
-  border: 1px solid #27272a !important;
-  color: #e4e4e7 !important;
+  background-color: var(--input-bg) !important;
+  border: 1px solid var(--input-border) !important;
+  color: var(--text-primary) !important;
   border-radius: 6px;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .input-custom:focus {
-  background-color: #09090b !important;
-  border-color: #52525b !important;
+  border-color: #3cca4f !important;
   box-shadow: none !important;
+  outline: none !important;
 }
 
 .btn-adicionar-aula {
-  background-color: #ffffff;
-  color: #000000 !important;
-  transition: transform 0.1s ease;
+  background-color: var(--text-primary);
+  color: var(--menu-bg) !important;
+  transition: transform 0.1s ease, opacity 0.2s;
   border-radius: 6px;
 }
 
 .btn-adicionar-aula:hover {
-  background-color: #e4e4e7;
+  opacity: 0.9;
 }
 
 .style-table {
   --bs-table-bg: transparent !important;
-  color: #f4f4f5 !important;
+  color: var(--text-primary) !important;
 }
 
 .style-table tr {
@@ -122,7 +197,7 @@
 }
 
 .style-table tbody tr:hover {
-  background-color: rgba(255, 255, 255, 0.02) !important;
+  background-color: var(--border-color) !important;
 }
 
 .style-action-btn {
@@ -134,11 +209,12 @@
   z-index: 10;
   width: 100%;
   padding: 1.5rem 0;
-  border-top: 1px solid #18181b;
-  background-color: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid var(--border-color);
+  background-color: var(--nav-bg);
   text-align: center;
   color: #598b59;
   font-size: 0.9rem;
   font-style: italic;
   margin-top: auto;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }

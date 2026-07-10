@@ -25,6 +25,7 @@ interface RegistroEstudo {
 export class DashboardComponent implements OnInit, OnDestroy {
   listaEstudos: RegistroEstudo[] = [];
   menuAberto = false;
+  temaClaro = false;
 
   idEmEdicao: number | null = null;
   materiaInput = '';
@@ -42,7 +43,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   dicas = [
     'Dividir o estudo em blocos de 25 minutos (Pomodoro) mantém o foco e a produtividade em níveis constantes.',
-    'Estudar através de questões força o aprendizado ativo, fixando o conteúdo com muito mais eficiência que apenas reler materiais.',
+    'Estudar através de questões força o academicismo ativo, fixando o conteúdo com muito mais eficiência que apenas reler materiais.',
     'Revisar seu histórico de desempenho ajuda a identificar quais matérias exigem mais atenção antes que elas se tornem um problema.',
     'Ambiente organizado é metade da produtividade; elimine distrações visuais para melhorar sua capacidade de memorização.'
   ];
@@ -52,6 +53,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    const temaSalvo = localStorage.getItem('studyflow_tema');
+    if (temaSalvo === 'claro') {
+      this.temaClaro = true;
+    }
+
     const dadosSalvos = localStorage.getItem('studyflow_dados');
     if (dadosSalvos) {
       this.listaEstudos = JSON.parse(dadosSalvos);
@@ -79,6 +85,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     if (this.timerDicas) {
       clearInterval(this.timerDicas);
     }
+  }
+
+  toggleTema() {
+    this.temaClaro = !this.temaClaro;
+    localStorage.setItem('studyflow_tema', this.temaClaro ? 'claro' : 'escuro');
   }
 
   rotacionarFundo() {

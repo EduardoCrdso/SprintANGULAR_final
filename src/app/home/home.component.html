@@ -1,23 +1,30 @@
-<div class="home-bg-wrapper" [style.background-image]="'url(' + bgImagens[indexBg] + ')'" (click)="esconderBoasVindas()">
+<div class="home-bg-wrapper" [class.light-theme]="temaClaro" [style.background-image]="'url(' + bgImagens[indexBg] + ')'">
 
   <div class="dark-overlay"></div>
 
   <header class="d-flex justify-content-between align-items-center p-3 border-bottom container-fluid style-navbar">
-    <button class="btn btn-dark border-0 px-3 py-2 btn-menu-toggle" (click)="toggleMenu(); $event.stopPropagation()">
+    <button class="btn border-0 px-3 py-2 btn-menu-toggle" (click)="toggleMenu(); $event.stopPropagation()">
      ☰
     </button>
+    
     <div class="style-logo">STUDYFLOW</div>
-    <button class="btn btn-outline-light btn-sm px-3 py-2" (click)="logout(); $event.stopPropagation()">
-      Sair
-    </button>
+    
+    <div class="d-flex gap-2 align-items-center">
+      <button class="btn border-0 p-2 fs-5 lh-1 btn-theme-toggle" (click)="toggleTema(); $event.stopPropagation()">
+        {{ temaClaro ? '🌙' : '☀️' }}
+      </button>
+      <button class="btn btn-sm px-3 py-2 btn-logout" (click)="logout(); $event.stopPropagation()">
+        Sair
+      </button>
+    </div>
   </header>
 
   <div class="position-absolute top-0 start-0 h-100 p-4 border-end menu-flutuante" [class.aberto]="menuAberto" (click)="$event.stopPropagation()">
-    <button class="btn btn-sm btn-dark float-end mb-4 border-0" style="background-color: #18181b;" (click)="menuAberto = false">X</button>
+    <button class="btn btn-sm float-end mb-4 border-0 btn-close-menu" (click)="menuAberto = false">X</button>
     <div class="clearfix"></div>
     <nav class="nav flex-column gap-2 mt-2">
-      <a routerLink="/home" class="nav-link text-white p-2 rounded bg-secondary fw-semibold" (click)="menuAberto = false">Home</a>
-      <a routerLink="/dashboard" class="nav-link text-muted p-2 rounded hover-white fw-semibold style-nav-item" (click)="menuAberto = false">Dashboard Estudos</a>
+      <a routerLink="/home" class="nav-link p-2 rounded fw-semibold style-nav-item-active" (click)="menuAberto = false">Home</a>
+      <a routerLink="/dashboard" class="nav-link p-2 rounded fw-semibold style-nav-item" (click)="menuAberto = false">Dashboard Estudos</a>
     </nav>
   </div>
 
@@ -41,27 +48,27 @@
         </p>
       </div>
 
-      <button class="position-absolute top-50 start-0 translate-middle-y btn text-muted h-100 px-3 border-0 control-btn" (click)="slideAnterior(); $event.stopPropagation()">‹</button>
-      <button class="position-absolute top-50 end-0 translate-middle-y btn text-muted h-100 px-3 border-0 control-btn" (click)="proximoSlide(); $event.stopPropagation()">›</button>
+      <button class="position-absolute top-50 start-0 translate-middle-y btn h-100 px-3 border-0 control-btn" (click)="slideAnterior(); $event.stopPropagation()">‹</button>
+      <button class="position-absolute top-50 end-0 translate-middle-y btn h-100 px-3 border-0 control-btn" (click)="proximoSlide(); $event.stopPropagation()">›</button>
               
       <div class="d-flex justify-content-center gap-2 mt-3 position-absolute bottom-0 start-50 translate-middle-x mb-4">
         <div *ngFor="let s of slides; let i = index" 
              class="rounded-pill transition-all" 
              [style.width]="i === indiceAtivo ? '24px' : '8px'" 
              [style.height]="'4px'"
-             [style.background-color]="i === indiceAtivo ? '#ffffff' : '#27272a'"></div>
+             [style.background-color]="i === indiceAtivo ? 'var(--text-primary)' : 'var(--input-border)'"></div>
       </div>
     </div>
 
     <div class="card border-0 p-4 p-md-5 rounded-4 mt-5 solid-card mb-5">
-      <div class="border-bottom pb-3 mb-4" style="border-color: #27272a !important;">
+      <div class="border-bottom pb-3 mb-4" style="border-color: var(--input-border) !important;">
         <h3 class="h5 fw-bold text-white m-0 tracking-tight">Coleção de Aulas Úteis</h3>
         <p class="small text-muted m-0 mt-1">Gerencie links externos e conteudos complementares para a sua grade horaria.</p>
       </div>
 
       <div class="row g-4">
         <div class="col-12 col-lg-5">
-          <div class="p-4 rounded-4" style="background-color: #09090b; border: 1px solid #18181b;">
+          <div class="p-4 rounded-4 dynamic-bg-item" style="border: 1px solid var(--border-color);">
             <h4 class="h6 fw-bold text-white mb-3 tracking-wide text-uppercase">Adicionar novo Conteúdo</h4>
             
             <div class="mb-3">
@@ -105,7 +112,7 @@
             </div>
 
             <div class="text-center py-5 text-muted small" *ngIf="listaAulas.length === 0">
-              Nenhuma aula pandente ou link registrado.
+              Nenhuma aula pendente ou link registrado.
             </div>
 
           </div>
@@ -119,9 +126,14 @@
     <div>&copy; 2026 StudyFlow. Todos os direitos reservados.</div>
   </footer>
 
-  <div class="position-fixed bottom-0 end-0 m-4 p-3 rounded-3 shadow-lg border text-start alert-toast" *ngIf="mostrarBoasVindas">
-    <div class="fw-bold text-white mb-1" style="font-size: 0.95rem;">Sistema Ativo</div>
-    <p class="text-muted small m-0">O carrossel mostrara o diagnostico das suas disciplinas de acordo com seu rendimento.</p>
+  <div class="popup-overlay" [class.ativo]="mostrarBoasVindas" (click)="esconderBoasVindas()">
+    <div class="popup-card solid-card rounded-4 text-center" (click)="$event.stopPropagation()">
+      <div class="display-6 mb-2">👋</div>
+      <h4 class="fw-bold text-white mb-2 tracking-tight">Bem-vindo ao StudyFlow</h4>
+      <p class="text-muted small mb-0">
+        Seu ecossistema de estudos está pronto. Clique em qualquer lugar da tela para entrar.
+      </p>
+    </div>
   </div>
 
 </div>

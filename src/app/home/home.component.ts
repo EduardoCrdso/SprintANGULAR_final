@@ -27,7 +27,8 @@ interface AulaUti {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   menuAberto = false;
-  mostrarBoasVindas = true;
+  mostrarBoasVindas = false;
+  temaClaro = false;
 
   slides: CardDica[] = [];
   indiceAtivo = 0;
@@ -49,6 +50,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    if (!sessionStorage.getItem('boas_vindas_vistas')) {
+      this.mostrarBoasVindas = true;
+      sessionStorage.setItem('boas_vindas_vistas', 'true');
+    }
+
+    const temaSalvo = localStorage.getItem('studyflow_tema');
+    if (temaSalvo === 'claro') {
+      this.temaClaro = true;
+    }
+
     this.gerarSlidesDoCarrossel();
     this.carregarAulas();
     
@@ -68,6 +79,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.timerBg) {
       clearInterval(this.timerBg);
     }
+  }
+
+  toggleTema() {
+    this.temaClaro = !this.temaClaro;
+    localStorage.setItem('studyflow_tema', this.temaClaro ? 'claro' : 'escuro');
   }
 
   rotacionarFundo() {
@@ -190,7 +206,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   toggleMenu() {
     this.menuAberto = !this.menuAberto;
-    this.mostrarBoasVindas = false;
   }
 
   esconderBoasVindas() {
